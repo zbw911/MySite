@@ -25,4 +25,15 @@ setDiscript("用于测试的<b>加黑</b>的");
 
         return "article/index";
     }
+
+
+    @RequestMapping({ "/v"})
+    public String video(  Model model) {
+//        model.addAttribute("username", username);
+
+
+
+
+        return "article/video";
+    }
 }

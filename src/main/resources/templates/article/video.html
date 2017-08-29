@@ -1,0 +1,37 @@
+
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<div id="playerContainer"></div>
+
+<script type="text/javascript" src="//p-vp.autohome.com.cn/api/player?direct=1"></script>
+<!-- 先引入JS，再调用接口 -->
+<script type="text/javascript">
+
+    var ahplayer ;
+    function showvideo(vid)
+    {
+        document.getElementById('playerContainer').innerHTML = '';
+
+        ahplayer = AHVP.newPlayer({
+            vid: vid,
+            autostart: true,
+            container: "playerContainer"
+        });
+
+    }
+
+    window.onload = function () {
+        showvideo('2F7313D234F3713D')
+    }
+</script>
+
+<input type="button" onclick="showvideo('2F7313D234F3713D')" value="1"/>
+<br/>
+<input type="button" onclick="showvideo('7C1DB3EEE3F0C859')" value="2"/>
+
+</body>
+</html>
