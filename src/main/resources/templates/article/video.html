@@ -1,15 +1,17 @@
-
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
-<div id="playerContainer"></div>
+<div  style="width:500px;height:350px" id="playerContainer"></div>
 
 <script type="text/javascript" src="//p-vp.autohome.com.cn/api/player?direct=1"></script>
 <!-- 先引入JS，再调用接口 -->
 <script type="text/javascript">
+
+
 
     var ahplayer ;
     function showvideo(vid)
@@ -19,15 +21,18 @@
         ahplayer = AHVP.newPlayer({
             vid: vid,
             autostart: true,
-            container: "playerContainer"
+            container: "playerContainer",
+            playtime:0
         });
 
     }
+
 
     window.onload = function () {
         showvideo('2F7313D234F3713D')
     }
 </script>
+
 
 <input type="button" onclick="showvideo('2F7313D234F3713D')" value="1"/>
 <br/>
