@@ -1,4 +1,4 @@
-package com.zhangbaowei.demo;
+package com.zhangbaowei.demo.core;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
