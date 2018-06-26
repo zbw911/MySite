@@ -1,5 +1,6 @@
 package com.zhangbaowei.demo.core;
 
+import com.zhangbaowei.demo.core.qq.MyApplicationContextAware;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,5 +47,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean()
     public javax.servlet.Filter AuthFilter() {
         return new CaseInsensitiveRequestFilter();
+    }
+
+
+    @Bean(name = "myApplicationContextAware", initMethod = "init", destroyMethod = "destroy")
+    public MyApplicationContextAware xxlJobDynamicScheduler(FilterRegistrationBean filterRegistrationBean) throws Exception {
+        MyApplicationContextAware myApplicationContextAware = new MyApplicationContextAware();
+
+        return myApplicationContextAware;
     }
 }
