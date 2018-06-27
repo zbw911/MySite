@@ -38,7 +38,19 @@ public class ScatterTest {
         ScatterList(list, 2);
 
 
+    }
 
+    @Test
+    public void TimeTest() {
+
+        System.out.println(System.currentTimeMillis());
+        System.out.println(System.currentTimeMillis() + (30l * 24 * 3600 * 1000));
+        System.out.println(30d * 24 * 3600 * 1000);
+        java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+        System.out.println(sqlDate.toString()); // 输出结果：2015-06-25
+
+        sqlDate = new java.sql.Date(System.currentTimeMillis() + (30l * 24 * 3600 * 1000));
+        System.out.println(sqlDate.toString()); // 输出结果：2015-06-25
     }
 
 

@@ -25,10 +25,10 @@ public class ChartController {
         List<Datas> list = new ArrayList<>();
 
         if (from == 0)
-            from = System.currentTimeMillis() - 100 * 24 * 3600 * 1000;
+            from = System.currentTimeMillis() - 100L * 24 * 3600 * 1000;
 
         if (to == 0)
-            to = System.currentTimeMillis() + 100 * 24 * 3600 * 1000;
+            to = System.currentTimeMillis() + 100L * 24 * 3600 * 1000;
 
 
 
