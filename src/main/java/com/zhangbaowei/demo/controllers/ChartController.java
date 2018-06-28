@@ -46,7 +46,7 @@ public class ChartController {
         }
 
 
-        Thread.sleep(3 * 1000);
+//        Thread.sleep(3 * 1000);
         List<Datas> list = new ArrayList<>();
         double timestamp = to - from;
         double step = timestamp / 10;
