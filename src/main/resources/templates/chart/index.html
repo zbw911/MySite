@@ -34,12 +34,14 @@
 
     function getdata(from, to) {
         $.getJSON('data?from=' + from + "&to=" + to, function (data) {
+            chart.hideLoading();
             var browsers = [];
             //迭代，把异步获取的数据放到数组中
             $.each(data, function (i, d) {
                 browsers.push([d.time, d.data]);
             });
             createChart();
+
             //设置数据
             chart.series[0].setData(browsers);
         });
@@ -54,14 +56,19 @@
                 zoomType: 'x',
                 events: {
                     selection: function (e) {
-                        // console.log(e);
-                        // console.log(e.xAxis[0].min + "==> " + dateFormat(e.xAxis[0].min));
+                        chart.showLoading();
                         getdata(e.xAxis[0].min, e.xAxis[0].max);
                     }
-                }
+                }, resetZoomButton: {
+                    theme: {
+                        display: 'none'
+                    }
+                },
+
             },
+
             title: {
-                text: '用于缩放取数据的示例'
+                text: '服务端取数据用于缩放取数据的示例'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -72,13 +79,15 @@
                 labels: {
                     formatter: function () {
                         return dateFormat(this.value);
-                    }
+                    },
+
                 }
             },
             yAxis: {
                 title: {
                     text: 'Exchange rate'
-                }
+                },
+                min: 0
             },
             legend: {
                 enabled: false
@@ -86,16 +95,16 @@
             plotOptions: {
                 area: {
                     fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
+                        // linearGradient: {
+                        //     x1: 0,
+                        //     y1: 0,
+                        //     x2: 0,
+                        //     y2: 1
+                        // },
+                        // stops: [
+                        //     [0, Highcharts.getOptions().colors[0]],
+                        //     [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        // ]
                     },
                     marker: {
                         radius: 2
@@ -108,14 +117,24 @@
                     },
                     threshold: null
                 }
+
             },
 
+            exporting: {
+                chartOptions: {
+                    annotationsOptions: {
+                        enabledButtons: false
+                    }
+                },
+            },
             series: [{
                 type: 'area',
-                name: '数据'
+                name: '数据',
+                animation: false
             }]
         });
     }
+
     // ]]>
 </script>
 </body>

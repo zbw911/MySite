@@ -4,50 +4,76 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/chart")
 public class ChartController {
 
 
+    ChartController() {
+
+    }
+
     @RequestMapping("/")
     public String Index() {
         return "chart/index";
     }
 
-
     @ResponseBody
     @RequestMapping("/data")
-    public List<Datas> ChartData(double from, double to) {
+    public List<Datas> ChartData(double from, double to) throws ParseException, InterruptedException {
+
+
+        if (from == 0) {
+
+            //注意format的格式要与日期String的格式相匹配
+            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//            DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss").parseDateTime("04/02/2011 20:27:05");
+            Date date = sdf.parse("2018/01/10 0:0:0");
+            if (from == 0)
+                from = date.getTime();
+
+            if (to == 0)
+                to = date.getTime() + 1L * 24 * 3600 * 1000;
+
+            MockData.initData(from, to);
+        }
+
+
+        Thread.sleep(3 * 1000);
         List<Datas> list = new ArrayList<>();
-
-        if (from == 0)
-            from = System.currentTimeMillis() - 100L * 24 * 3600 * 1000;
-
-        if (to == 0)
-            to = System.currentTimeMillis() + 100L * 24 * 3600 * 1000;
-
-
-
         double timestamp = to - from;
+        double step = timestamp / 10;
+        if (to - from > 15 * 24 * 3600 * 1000) {
+            step = 24 * 3600 * 1000; //天
+        } else if (to - from >= 24 * 3600 * 1000) {
+            step = 1 * 3600 * 1000; //小时
+        } else if (to - from >= 1 * 3600 * 1000) {
+            step = 60 * 1000; //分
+        } else if (to - from <= 1000) {
+            to = from + 1000;
+            step = 1000;
+        }
 
-
-        double step = timestamp / 100;
-
+        from = ((int) (from / step) * step);
 
         double temp = from;
-        Random random = new Random();
+
         do {
             Datas d = new Datas();
             d.setTime(temp);
-            d.setData(random.nextInt(100));
+            int sumdata = MockData.getdata(temp, temp + step);
+            d.setData(sumdata);
 
             list.add(d);
 
-            if (temp > to)
+            if (temp >= to)
                 break;
 
             temp = temp + (step);
@@ -56,6 +82,7 @@ public class ChartController {
 
         return list;
     }
+
 
     public class Datas {
         private double time;
