@@ -50,6 +50,8 @@ public class ChartController {
         List<Datas> list = new ArrayList<>();
         double timestamp = to - from;
         double step = timestamp / 10;
+
+
         if (to - from > 15 * 24 * 3600 * 1000) {
             step = 24 * 3600 * 1000; //天
         } else if (to - from >= 24 * 3600 * 1000) {
@@ -60,6 +62,8 @@ public class ChartController {
             to = from + 1000;
             step = 1000;
         }
+        if (step < 1000)
+            step = 1000;
 
         from = ((int) (from / step) * step);
 
