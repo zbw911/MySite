@@ -24,7 +24,7 @@ public class HomeController {
     @RequestMapping("/post")
     public String Post(@RequestParam(value = "id", required = false, defaultValue = "0") String id, Model model) {
 
-        return "home/index";
+        return "home/post";
     }
 
     @RequestMapping("/about")
