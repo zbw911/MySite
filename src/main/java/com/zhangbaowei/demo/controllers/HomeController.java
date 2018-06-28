@@ -15,9 +15,25 @@ public class HomeController {
 //    }
 
 
-    @RequestMapping("/")
+    @RequestMapping({"/", "/index"})
     public String helloWorld(@RequestParam(value = "username", required = false, defaultValue = "World") String username, Model model) {
         model.addAttribute("username", username);
-        return "index";
+        return "home/index";
+    }
+
+    @RequestMapping("/post")
+    public String Post(@RequestParam(value = "id", required = false, defaultValue = "0") String id, Model model) {
+
+        return "home/index";
+    }
+
+    @RequestMapping("/about")
+    public String About() {
+        return "home/about";
+    }
+
+    @RequestMapping("/contact")
+    public String Contact() {
+        return "home/contact";
     }
 }

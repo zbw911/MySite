@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/post")
+public class ArtController {
     @RequestMapping({"/", "/index"})
     public String index(Model model) {
 //        model.addAttribute("username", username);
