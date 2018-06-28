@@ -63,6 +63,10 @@ public class ChartController {
 
         from = ((int) (from / step) * step);
 
+        if (from == 0) {
+            return list;
+        }
+
         double temp = from;
 
         do {
