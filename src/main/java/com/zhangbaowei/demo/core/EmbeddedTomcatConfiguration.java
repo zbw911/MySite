@@ -2,8 +2,7 @@ package com.zhangbaowei.demo.core;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,13 +16,15 @@ public class EmbeddedTomcatConfiguration {
     private String additionalPorts;
 
     @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-        Connector[] additionalConnectors = this.additionalConnector();
-        if (additionalConnectors != null && additionalConnectors.length > 0) {
-            tomcat.addAdditionalTomcatConnectors(additionalConnectors);
-        }
-        return tomcat;
+    public TomcatServletWebServerFactory servletContainer() {
+        TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory();
+        tomcatServletWebServerFactory.addAdditionalTomcatConnectors(this.additionalConnector());
+//        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+//        Connector[] additionalConnectors = this.additionalConnector();
+//        if (additionalConnectors != null && additionalConnectors.length > 0) {
+//            tomcat.addAdditionalTomcatConnectors(additionalConnectors);
+//        }
+        return tomcatServletWebServerFactory;
     }
 
     private Connector[] additionalConnector() {
