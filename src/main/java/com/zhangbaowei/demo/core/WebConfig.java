@@ -57,10 +57,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
 
-    @Bean(name = "myApplicationContextAware", initMethod = "init", destroyMethod = "destroy")
-    public MyApplicationContextAware xxlJobDynamicScheduler(FilterRegistrationBean filterRegistrationBean) throws Exception {
-        MyApplicationContextAware myApplicationContextAware = new MyApplicationContextAware();
-
-        return myApplicationContextAware;
-    }
+//    @Bean(name = "myApplicationContextAware", initMethod = "init", destroyMethod = "destroy")
+//    public MyApplicationContextAware xxlJobDynamicScheduler(FilterRegistrationBean filterRegistrationBean) throws Exception {
+//        MyApplicationContextAware myApplicationContextAware = new MyApplicationContextAware();
+//
+//        return myApplicationContextAware;
+//    }
 }
