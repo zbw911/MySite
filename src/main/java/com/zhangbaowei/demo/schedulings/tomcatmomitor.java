@@ -11,7 +11,7 @@ public class tomcatmomitor {
     @Autowired
     private MetricsEndpoint metricsEndpoint;
 
-    @Scheduled(fixedRate = 100)
+    @Scheduled(fixedRate = 1000)
     public void fixedRate() {
 
         MetricsEndpoint.ListNamesResponse listNamesResponse = metricsEndpoint.listNames();
@@ -19,9 +19,10 @@ public class tomcatmomitor {
         MetricsEndpoint.MetricResponse metric = metricsEndpoint.metric("tomcat.threads.busy", null);
 
         Double value = metric.getMeasurements().get(0).getValue();
-//
-//        String join = String.join(",", listNamesResponse.getNames());
+
+        String join = String.join("\r\n", listNamesResponse.getNames());
         System.out.println(value);
+       // System.out.println(join);
 
     }
 
