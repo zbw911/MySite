@@ -21,7 +21,7 @@ public class tomcatmomitor {
         Double value = metric.getMeasurements().get(0).getValue();
 
         String join = String.join("\r\n", listNamesResponse.getNames());
-        System.out.println(value);
+      //  System.out.println(value);
        // System.out.println(join);
 
     }
