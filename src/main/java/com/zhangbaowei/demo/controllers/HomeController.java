@@ -32,10 +32,11 @@ public class HomeController {
         try {
             URL   url = new URL(request.getRequestURL().toString());
               host  = url.getHost();
-
+            System.out.println(host);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
+
         }
 
         if(host != null && host.toLowerCase().indexOf("zhuangniyukonglong.com")>=0)
